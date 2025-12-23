@@ -12,3 +12,4 @@ http.createServer((req, res) => {
     res.end("Backend running via PM2 🚀");
   }
 }).listen(3000);
+// auto deploy test
