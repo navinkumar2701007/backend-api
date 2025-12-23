@@ -1,9 +1,14 @@
+// webhook auto deploy test
 const http = require("http");
-
-const PORT = 3000;
+const { exec } = require("child_process");
 
 http.createServer((req, res) => {
-  res.end("Backend running via PM2 🚀");
-}).listen(PORT, () => {
-  console.log("Backend running on port 3000");
-});
+  if (req.url === "/status") {
+    exec("pm2 jlist", (err, stdout) => {
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(stdout);
+    });
+  } else {
+    res.end("Backend running via PM2 🚀");
+  }
+}).listen(3000);
