@@ -1,16 +1,21 @@
-// webhook auto deploy test
-const http = require("http");
-const { exec } = require("child_process");
+const express = require("express");
+const app = express();
 
-http.createServer((req, res) => {
-  if (req.url === "/status") {
-    exec("pm2 jlist", (err, stdout) => {
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(stdout);
-    });
-  } else {
-    res.end("backend auto deploy working");
-  }
-}).listen(3000);
-// auto deploy test
-// webhook final fix
+app.get("/", (req, res) => {
+  res.json({
+    status: "success",
+    message: "Backend auto deploy working 🚀",
+    service: "backend-api",
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.get("/health", (req, res) => {
+  res.json({
+    status: "ok"
+  });
+});
+
+app.listen(3000, () => {
+  console.log("Backend running on port 3000");
+});
