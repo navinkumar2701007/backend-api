@@ -9,7 +9,7 @@ http.createServer((req, res) => {
       res.end(stdout);
     });
   } else {
-    res.end("Backend successfully 123 running via PM2 🚀");
+    res.end("backend auto deploy working");
   }
 }).listen(3000);
 // auto deploy test
