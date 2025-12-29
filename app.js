@@ -12,7 +12,7 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
   res.json({
     status: "success",
-    message: "Backend auto deploy working ",
+    message: "Backend auto deploy working 🔥 ",
     service: "backend-api",
     timestamp: new Date().toISOString()
   });
