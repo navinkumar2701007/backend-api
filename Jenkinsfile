@@ -4,9 +4,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main',
-                    credentialsId: 'github-ssh',
-                    url: 'git@github.com:navinkumar2701007/<backend-repo>.git'
+                checkout scm
             }
         }
 
