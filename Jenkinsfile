@@ -6,9 +6,9 @@ pipeline {
             steps {
                 sh '''
                 cd /var/www/backend
-                git pull origin main
                 npm install --production
                 pm2 restart backend-api
+                pm2 save
                 '''
             }
         }
