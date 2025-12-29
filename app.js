@@ -1,15 +1,13 @@
 const express = require("express");
-const cors = require("cors");
-
 const app = express();
 
-// ✅ Allow frontend domains
-app.use(cors({
-  origin: [
-    "https://navin.cloud",
-    "https://www.navin.cloud"
-  ]
-}));
+/* ✅ CORS FIX */
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://navin.cloud");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
 
 app.get("/", (req, res) => {
   res.json({
@@ -21,9 +19,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/health", (req, res) => {
-  res.json({
-    status: "ok"
-  });
+  res.json({ status: "ok" });
 });
 
 app.listen(3000, () => {
