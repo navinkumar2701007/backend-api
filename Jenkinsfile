@@ -2,27 +2,13 @@ pipeline {
     agent { label 'nginx' }
 
     stages {
-        stage('Checkout Code') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Install Dependencies') {
+        stage('Deploy Backend') {
             steps {
                 sh '''
                 cd /var/www/backend
-                npm install
-                '''
-            }
-        }
-
-        stage('Restart Backend with PM2') {
-            steps {
-                sh '''
-                cd /var/www/backend
-                pm2 restart backend || pm2 start app.js --name backend
-                pm2 save
+                git pull origin main
+                npm install --production
+                pm2 restart backend-api
                 '''
             }
         }
