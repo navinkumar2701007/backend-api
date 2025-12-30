@@ -6,20 +6,20 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "https://navin.cloud");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(204);
+  }
   next();
 });
 
 app.get("/", (req, res) => {
   res.json({
     status: "success",
-    message: "backend auto deploy working 123456 ",
+    message: "Backend auto deploy working FINAL 🚀",
     service: "backend-api",
     timestamp: new Date().toISOString()
   });
-});
-
-app.get("/health", (req, res) => {
-  res.json({ status: "ok" });
 });
 
 app.listen(3000, () => {
